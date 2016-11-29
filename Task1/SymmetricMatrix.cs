@@ -6,37 +6,42 @@ using System.Threading.Tasks;
 
 namespace Task1
 {
-    public class SymmetricMatrix<T> : SquareMatrix<T>
+    public class SymmetricMatrix<T> : AbstractMatrix<T>
     {
-        public SymmetricMatrix(IEnumerable<T> collection) : base(collection)
+        public SymmetricMatrix(int size) : base(size)
         {
+            Size = size;
+            array = new T[size * size];
+        }
+
+        public SymmetricMatrix(T[] array) : base(array)
+        {
+            int index = 0;
+            for (int i = 0; i < Size; i++)
+                for (int j = 0; j < Size; j++)
+                {
+                    if (i >= j)
+                        this.array[i * Size + j] = array[index];
+                    index++;
+                }
+        }
+
+        protected override T GetElement(int row, int column)
+        {
+            if (row.CompareTo(column) <= 0)
+                return array[row * Size + column];
+            else 
+                return array[column * Size + row];
 
         }
 
-        public override T this[int i, int j]
+        protected override void SetElement(T element, int row, int column)
         {
-            get
-            {
-                if (i < 0 || j < 0 || i >= Size || j >= Size)
-                    throw new ArgumentOutOfRangeException();
+            if (row.CompareTo(column) <= 0)
+                array[row * Size + column] = element;
+            else 
+                array[column * Size + row] = element;
 
-                if (i.CompareTo(j) <= 0)
-                    return array[i * Size + j];
-                else
-                    return array[j * Size + i];
-            }
-            set
-            {
-                if (i < 0 || j < 0 || i >= Size || j >= Size)
-                    throw new ArgumentOutOfRangeException();
-
-                if (i.CompareTo(j) <= 0)
-                    array[i * Size + j] = value;
-                else
-                    array[j * Size + i] = value;
-
-                OnElementChanged(new Data<T>(i, j));
-            }
         }
     }
 }

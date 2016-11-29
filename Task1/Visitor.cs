@@ -13,11 +13,11 @@ namespace Task1
         SquareMatrix<T> Visit(SquareMatrix<T> squareMatrix1, SymmetricMatrix<T> symmetricMatrix2);
         SquareMatrix<T> Visit(SquareMatrix<T> squareMatrix1, DiagonalMatrix<T> diagonalMatrix2);
         SymmetricMatrix<T> Visit(SymmetricMatrix<T> symmetricMatrix1, SymmetricMatrix<T> symmetricMatrix2);
-        SymmetricMatrix<T> Visit(SymmetricMatrix<T> symmetricMatrix1, SquareMatrix<T> symmetricMatrix2);
+        SquareMatrix<T> Visit(SymmetricMatrix<T> symmetricMatrix1, SquareMatrix<T> symmetricMatrix2);
         SymmetricMatrix<T> Visit(SymmetricMatrix<T> symmetricMatrix1, DiagonalMatrix<T> symmetricMatrix2);
         DiagonalMatrix<T> Visit(DiagonalMatrix<T> diagonalMatrix1, DiagonalMatrix<T> diagonalMatrix2);
-        DiagonalMatrix<T> Visit(DiagonalMatrix<T> diagonalMatrix1, SquareMatrix<T> diagonalMatrix2);
-        DiagonalMatrix<T> Visit(DiagonalMatrix<T> diagonalMatrix1, SymmetricMatrix<T> diagonalMatrix2);
+        SquareMatrix<T> Visit(DiagonalMatrix<T> diagonalMatrix1, SquareMatrix<T> diagonalMatrix2);
+        SquareMatrix<T> Visit(DiagonalMatrix<T> diagonalMatrix1, SymmetricMatrix<T> diagonalMatrix2);
     }
 
     public class ComputeSumMatrixVisitor<T> : IVisitor<T>
@@ -46,10 +46,10 @@ namespace Task1
             return new SymmetricMatrix<T>(obtainedArray);
         }
 
-        public SymmetricMatrix<T> Visit(SymmetricMatrix<T> symmetricMatrix1, SquareMatrix<T> squareMatrix2)
+        public SquareMatrix<T> Visit(SymmetricMatrix<T> symmetricMatrix1, SquareMatrix<T> squareMatrix2)
         {
             T[] obtainedArray = SumMatrix(symmetricMatrix1, squareMatrix2);
-            return new SymmetricMatrix<T>(obtainedArray);
+            return new SquareMatrix<T>(obtainedArray);
         }
 
         public SymmetricMatrix<T> Visit(SymmetricMatrix<T> symmetricMatrix1, DiagonalMatrix<T> diagonalMatrix2)
@@ -64,16 +64,16 @@ namespace Task1
             return new DiagonalMatrix<T>(obtainedArray);
         }
 
-        public DiagonalMatrix<T> Visit(DiagonalMatrix<T> diagonalMatrix1, SquareMatrix<T> squareMatrix2)
+        public SquareMatrix<T> Visit(DiagonalMatrix<T> diagonalMatrix1, SquareMatrix<T> squareMatrix2)
         {
             T[] obtainedArray = SumMatrix(diagonalMatrix1, squareMatrix2);
-            return new DiagonalMatrix<T>(obtainedArray);
+            return new SquareMatrix<T>(obtainedArray);
         }
 
-        public DiagonalMatrix<T> Visit(DiagonalMatrix<T> diagonalMatrix1, SymmetricMatrix<T> symmetricMatrix2)
+        public SquareMatrix<T> Visit(DiagonalMatrix<T> diagonalMatrix1, SymmetricMatrix<T> symmetricMatrix2)
         {
             T[] obtainedArray = SumMatrix(diagonalMatrix1, symmetricMatrix2);
-            return new DiagonalMatrix<T>(obtainedArray);
+            return new SquareMatrix<T>(obtainedArray);
         }      
 
         private T[] SumMatrix(AbstractMatrix<T> matrix1, AbstractMatrix<T> matrix2)

@@ -38,15 +38,15 @@ namespace Task1.Tests
             SquareMatrix<int> matrix2 = new SquareMatrix<int>(array);
 
             ComputeSumMatrixVisitor<int> visitor = new ComputeSumMatrixVisitor<int>();
-            matrix1 = (SymmetricMatrix<int>)matrix1.Accept(visitor, matrix2);
+            matrix2 = (SquareMatrix<int>)matrix1.Accept(visitor, matrix2);
 
             int[] result = new int[] {2,3,4,3,6,7,4,3,10};
             int index = 0;
-            for (int i = 0; i < matrix1.Size; i++)
+            for (int i = 0; i < matrix2.Size; i++)
             {
-                for (int j = 0; j < matrix1.Size; j++)
+                for (int j = 0; j < matrix2.Size; j++)
                 {
-                    Assert.AreEqual(result[index], matrix1[i,j]);
+                    Assert.AreEqual(result[index], matrix2[i,j]);
                 }
             }                 
         }
